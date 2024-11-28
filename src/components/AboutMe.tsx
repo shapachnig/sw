@@ -3,21 +3,21 @@ import {characters, period_month} from "../utils/constants.ts";
 import {HeroInfo} from "../utils/types";
 import {withErrorPage} from "../hoc/withErrorPage.tsx";
 
-interface Props {
-    heroId: string;
+interface AboutMeProps {
+    heroId?: string;
 }
 
-const AboutMe = ({heroId}: Props) => {
+const AboutMe = ({heroId}: AboutMeProps) => {
     const [hero, setHero] = useState<HeroInfo>();
 
 
 
     useEffect(() => {
-        const hero = JSON.parse(localStorage.getItem(heroId)!);
+        const hero = JSON.parse(localStorage.getItem(heroId!)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
             setHero(hero.payload);
         } else {
-            fetch(characters[heroId].url)
+            fetch(characters[heroId!].url)
                 .then(response => response.json())
                 .then(data => {
                     const info = {
@@ -31,7 +31,7 @@ const AboutMe = ({heroId}: Props) => {
                         eye_color: data.eye_color
                     }
                     setHero(info);
-                    localStorage.setItem(heroId, JSON.stringify({
+                    localStorage.setItem(heroId!, JSON.stringify({
                         payload: info,
                         timestamp: Date.now()
                     }));
