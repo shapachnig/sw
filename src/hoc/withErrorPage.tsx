@@ -4,7 +4,11 @@ import {ComponentType, useContext, useEffect} from "react";
 import {SWContext} from "../utils/context.ts";
 import ErrorPage from "../components/ErrorPage.tsx";
 
-export const withErrorPage = (Component: ComponentType) => (props: object) => {
+interface Props {
+    heroId: string;
+}
+
+export const withErrorPage = (Component: ComponentType<Props>) => (props: object) => {
     const {heroId = defaultHero} = useParams();
     const {changeHero} = useContext(SWContext);
 
@@ -15,5 +19,5 @@ export const withErrorPage = (Component: ComponentType) => (props: object) => {
 
     }, [heroId])
 
-    return characters[heroId] ? <Component {...props}/> : <ErrorPage/>;
+    return characters[heroId] ? <Component heroId={heroId} {...props}/> : <ErrorPage/>;
 }
