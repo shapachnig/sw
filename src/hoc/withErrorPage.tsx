@@ -5,7 +5,7 @@ import {SWContext} from "../utils/context.ts";
 import ErrorPage from "../components/ErrorPage.tsx";
 
 export const withErrorPage = (Component: React.FC) => (props: object) => {
-    const {hero: heroId = defaultHero} = useParams();
+    const {heroId = defaultHero} = useParams();
     const {changeHero} = useContext(SWContext);
 
     useEffect(() => {
