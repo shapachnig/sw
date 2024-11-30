@@ -8,11 +8,13 @@ import {SWContext} from "./utils/context.ts";
 
 function App() {
     const [hero, setHero] = useState(defaultHero);
+    const [headerError, setHeaderError] = useState(true);
 
     return (
         <>
             <SWContext.Provider value={{
-                hero, changeHero: setHero
+                hero, changeHero: setHero,
+                headerError, changeHeader: setHeaderError
             }}>
                 <Header/>
                 <Main/>

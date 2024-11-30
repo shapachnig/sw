@@ -7,11 +7,14 @@ import ErrorPage from "../components/ErrorPage.tsx";
 
 export const withErrorPage = <T extends object>(Component: ComponentType<T>) => (props: T) => {
     const {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext);
+    const {changeHero, changeHeader} = useContext(SWContext);
 
     useEffect(() => {
         if (characters[heroId]) {
             changeHero(heroId);
+            changeHeader(true);
+        } else {
+            changeHeader(false);
         }
 
     }, [heroId])

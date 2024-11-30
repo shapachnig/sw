@@ -1,6 +1,10 @@
+import {defaultHero} from "./constants.ts";
+
 export interface SWContextValue {
     hero: string,
     changeHero: (hero: string) => void,
+    headerError: boolean,
+    changeHeader: (headerError: boolean) => void
 }
 
 export interface HeroInfo {
